@@ -1,0 +1,15 @@
+﻿@inherits Blazor.Fluxor.Components.FluxorComponent
+@inject IState<BasicState> BasicState
+
+<div style="border: 1px solid black; color: brown;">
+    <h3>Inside TestComponent</h3>
+
+    @if (BasicState.Value.Dict != null)
+    {
+        @foreach (var stringPair in BasicState.Value.Dict)
+        {
+            @stringPair.Value <br />
+        }
+    }
+
+</div>

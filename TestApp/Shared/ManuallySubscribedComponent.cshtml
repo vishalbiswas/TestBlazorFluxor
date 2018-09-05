@@ -1,0 +1,21 @@
+﻿@inject IState<BasicState> BasicState
+
+<div style="border: 1px solid red; color: burlywood;">
+    <h3>Subscribed Manually</h3>
+
+    @if (BasicState.Value.Dict != null)
+    {
+        @foreach (var stringPair in BasicState.Value.Dict)
+        {
+            @stringPair.Value <br />
+        }
+    }
+
+</div>
+
+@functions {
+    protected override void OnInit()
+    {
+        BasicState.Subscribe(this);
+    }
+}

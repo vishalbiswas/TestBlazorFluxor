@@ -1,0 +1,29 @@
+﻿@page "/"
+@inherits Blazor.Fluxor.Components.FluxorComponent
+@inject IDispatcher Dispatcher
+@inject IState<BasicState> BasicState
+
+@if (BasicState.Value.Dict != null)
+{
+    @foreach (var stringPair in BasicState.Value.Dict)
+    {
+        @stringPair.Value <br />
+    }
+}
+
+<button onclick=@{() => StateHasChanged()}>Refresh</button>
+
+<TestComponent />
+
+<ManuallySubscribedComponent />
+
+@functions {
+    protected override void OnInit()
+    {
+        base.OnInit();
+        var dict = new Dictionary<string, string>();
+        dict.Add("first", "hello");
+        dict.Add("second", "world");
+        Dispatcher.Dispatch(new SetBasicAction(dict));
+    }
+}
